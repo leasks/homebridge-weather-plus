@@ -99,7 +99,7 @@
     "request": "^2.88.2"
   },
   "funding": {
-    "type" : "buymeacoffee",
-    "url" : "https://buymeacoffee.com/naofireblade"
+    "type": "buymeacoffee",
+    "url": "https://buymeacoffee.com/naofireblade"
   }
 }

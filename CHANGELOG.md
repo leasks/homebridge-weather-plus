@@ -1,6 +1,7 @@
 ## 0.1.0
 
-* Added characteristics for precip 1 hour, precip today, wind direction, wind speed, air pressure, visibility, uv-index and station
+* Added characteristics for precip 1 hour, precip today, wind direction, wind speed, air pressure, visibility, uv-index
+  and station
 * Added condition category for sunny weather
 * Renamed condition values to condition categories
 * Changed condition category values
@@ -125,29 +126,36 @@
 * Fixed precipitation calculation in dark sky api
 
 ## 2.7.0
+
 * Added support for multiple weather stations
 
 ## 2.7.1
+
 * Fixed crash of homebridge when using expired weather underground api
 
 ## 2.7.2
+
 * Updated openweathermap dependency to v4.0.0
 
 ## 2.8.0
+
 * Removed old weather underground api (pre March 2019)
 * Added new weather underground api (post January 2019)
 
 ## 2.8.1
+
 * Fixed crash in openweathermap api that occured since v2.8.0
 
 ## 2.8.2
+
 * Fixed crash in weatherunderground on malformed/missing server response
 
 ## 3.0.0
+
 * Added compatiblity mode for Apple Home app
 * Added boolean sensors for currently raining / snowing
 * Added boolean sensors for rain / snow in the forecast
-* Added option to hide observation and forecast values 
+* Added option to hide observation and forecast values
 * Added option to have more detailed condition categories
 * Added option to show humidity as an extra accessory
 * Added option to disable the Now accessory
@@ -160,26 +168,33 @@
 * Warning: Weather history graphs will be cleared and start from scratch with this update
 
 ## 3.0.1
+
 * Updated readme
 
 ## 3.0.2
+
 * Updated readme
 
 ## 3.0.3
+
 * Added rounding for non metric values in Apple Home app
 
 ## 3.0.4
+
 * Improved rounding
 * Fixed wind sensor trigger for non metric units
 
 ## 3.1.0
+
 * Added support for config-ui-x
 * Added custom thresholds for apple home sensors
 
 ## 3.1.1
+
 * Added unit sitorr for air pressure in mmhg
 
 ## 3.1.2
+
 * Added one more day to Dark Sky forecast
 * Improved error logging for Weather Underground
 * Updated the readme to point out Dark Sky discontinuation
@@ -188,12 +203,15 @@
 * Fixed RainBool threshold too strict in DarkSky service
 
 ## 3.1.3
+
 * Changed minimum required node js version to v10
 
 ## 3.1.4
+
 * Fixed crash in OpenWeatherMap API
 
 ## 3.2.0
+
 * Added cloud cover to OpenWeatherMap
 * Added dew point to OpenWeatherMap
 * Added rain last hour to OpenWeatherMap
@@ -211,25 +229,30 @@
 * Fixed some missing weather categories for OpenWeatherMap
 
 ## 3.2.1
+
 * Improved error handling when the service parameter is missing in config
 * Fixed spelling of threshold parameter (old variant is still working)
 * Fixed crash in WeatherUnderground API when an error occurs
 
 ## 3.2.2
+
 * Added compatibility sensor for total precipitation
 * Changed precision of WeatherUnderground API to decimal
 * Fixed crash when OpenWeatherMap API returns no data
 
 ## 3.2.3
+
 * Fixed apparent temperature and dew point not responding if lower than 0°C
 
 ## 3.2.4
+
 * Fixed temperature not responding if lower than 0°C since v3.2.3
 * Fixed apparent temperature and dew point not responding in compatibility mode home if lower than 0°C
 * Fixed apparent temperature and dew point are not converted to F in compatibility mode eve
 * Fixed startup error when using compatibility mode eve2 (eve with grouping) and forecasts
 
 ## 3.2.5
+
 * Fixed datatype errors since homebridge 1.3.0
 * Fixed observation time issue in weatherunderground since homebridge 1.3.0
 * Fixed error in history service since homebridge 1.3.0
@@ -238,4 +261,5 @@
 * Added error log if no location is provided
 
 ## 3.2.6
+
 * Fixed missing rain value in forecasts from dark sky API when a day is skipped in config
