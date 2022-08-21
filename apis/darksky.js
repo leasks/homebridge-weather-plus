@@ -142,6 +142,7 @@ class DarkSkyAPI {
         report.UVIndex = isNaN(parseInt(values.uvIndex)) ? 0 : parseInt(values.uvIndex);
         report.Visibility = isNaN(parseInt(values.visibility)) ? 0 : parseInt(values.visibility);
         report.WindDirection = converter.getWindDirection(values.windBearing);
+        report.WindBearing = values.windBearing;
         report.WindSpeed = parseFloat(values.windSpeed);
         report.WindSpeedMax = parseFloat(values.windGust);
 

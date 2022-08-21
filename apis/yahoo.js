@@ -68,6 +68,7 @@ class YahooAPI {
         report.TemperatureMin = parseInt(values.item.forecast[0].low);
         report.Visibility = parseFloat(values.atmosphere.visibility);
         report.WindDirection = converter.getWindDirection(parseInt(values.wind.direction));
+        report.WindBearing = values.wind.direction;
         report.WindSpeed = parseFloat(values.wind.speed);
 
         const weather = {};

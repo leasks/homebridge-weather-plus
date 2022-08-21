@@ -3,12 +3,12 @@
 
 const getWindDirection = function (degree) {
     if (typeof degree !== 'number' || isNaN(degree)) {
-        return 'Unkown';
+        return 'Unknown';
     }
     let cat = Math.round(degree % 360 / 22.5);
     let dir;
 
-    // TODO multilanguage
+    // TODO multi-language
     switch (cat) {
         case 0:
             dir = 'N';
@@ -75,7 +75,27 @@ const getRainAccumulated = function (array, parameter) {
     return sum;
 };
 
+const cToF = function (c) {
+    return (c * 9 / 5) + 32;
+};
+
+const kmToMiles = function (km) {
+    return km * 0.62137
+};
+
+const cmToIn = function (cm) {
+    return cm * 0.3937008
+};
+
+const mbToIn = function (mb) {
+    return mb * 0.029529980;
+};
+
 module.exports = {
     getWindDirection,
-    getRainAccumulated
-};
+    getRainAccumulated,
+    cToF,
+    kmToMiles,
+    cmToIn,
+    mbToIn
+}

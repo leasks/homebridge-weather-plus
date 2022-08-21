@@ -264,6 +264,7 @@ class WeewxAPI {
             report.RainBool = observation.rainbool;
             report.ObservationTime = moment.unix(observation.epoch).tz(timezone).format('HH:mm:ss');
             report.WindDirection = converter.getWindDirection(isNaN(parseInt(observation.winddir)) ? 0 : parseInt(observation.winddir));
+            report.WindBearing = observation.winddir;
             report.Humidity = isNaN(observation.humidity) ? 0 : observation.humidity;
             report.SolarRadiation = isNaN(observation.solarRadiation) ? 0 : observation.solarRadiation;
             report.UVIndex = isNaN(observation.uv) ? 0 : observation.uv;

@@ -32,7 +32,7 @@ class WundergroundAPI {
         this.pwsService = pwsService;
 
         // Get observation values only in si 's' for now.
-        this.units = 'e';//m for metrics. e for english
+        this.units = 's'; //m for metrics. e for english
     }
 
     update(forecastDays, callback) {
@@ -89,7 +89,9 @@ class WundergroundAPI {
 
             report.ObservationStation = observation.stationID + " : " + observation.neighborhood;
             report.ObservationTime = moment(Date.parse(observation.obsTimeUtc)).format('HH:mm:ss');
+            report.ObservationTimeUTC = moment.utc(observation.obsTimeUtc).format("yyyy-MM-DD+HH:mm:ss")
             report.WindDirection = converter.getWindDirection(isNaN(parseInt(observation.winddir)) ? 0 : parseInt(observation.winddir));
+            report.WindBearing = observation.winddir;
             report.Humidity = isNaN(observation.humidity) ? 0 : observation.humidity;
             report.SolarRadiation = isNaN(observation.solarRadiation) ? 0 : observation.solarRadiation;
             report.UVIndex = isNaN(observation.uv) ? 0 : observation.uv;
@@ -99,6 +101,8 @@ class WundergroundAPI {
             report.WindSpeed = isNaN(values.windSpeed) ? 0 : values.windSpeed;
             report.WindSpeedMax = isNaN(values.windGust) ? 0 : values.windGust;
             report.RainDay = isNaN(values.precipTotal) ? 0 : values.precipTotal;
+            report.Precipitation = values.precipRate;
+            report.PrecipitationTotal = values.precipTotal;
 
             report.WundergroundData = observation;
         } catch (error) {

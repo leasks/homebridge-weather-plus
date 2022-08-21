@@ -148,6 +148,7 @@ class OpenWeatherMapAPI {
         report.TemperatureApparent = typeof values.feels_like === 'object' ? parseInt(values.feels_like.day) : parseInt(values.feels_like);
         report.UVIndex = parseInt(values.uvi);
         report.WindDirection = converter.getWindDirection(values.wind_deg);
+        report.WindBearing = values.wind_deg;
         report.WindSpeed = parseFloat(values.wind_speed);
     }
 
