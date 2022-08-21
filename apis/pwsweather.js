@@ -27,10 +27,11 @@ class PWSWeather {
         //observed values and spit out any unit we ask for. That would have been nice.
         //TODO For another day.
         let that = this;
-        let values = weather.report.imperialObservations;
+        let observation = weather.report.WundergroundData;
+        let values = observation.imperial;
         let queryUri = "https://pwsupdate.pwsweather.com/api/v1/submitwx?ID=" + this.stationID + "&PASSWORD=" + this.apiKey +
             "&softwaretype=Homebridge&action=updateraw" +
-            "&winddir=" + values.winddir +
+            "&winddir=" + observation.winddir +
             "&windspeedmph=" + values.windSpeed +
             "&windgustmph=" + values.windGust +
             "&tempf=" + values.temp +
@@ -38,7 +39,9 @@ class PWSWeather {
             "&daiyrainin=" + values.precipTotal +
             "&baromin=" + values.pressure +
             "&dewptf=" + values.dewpt +
-            "&humidity=" + values.humidity
+            "&humidity=" + observation.humidity +
+            "&solarradiation=" + observation.solarRadiation +
+            "&UV=" + observation.uv
         ;
 
         that.log.info("Posting to PWS")
