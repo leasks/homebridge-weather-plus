@@ -263,6 +263,19 @@
           },
           "tresholdWindSpeed": {
             "type": "integer"
+          },
+          "pwsWeather": {
+            "type": "object",
+            "properties": {
+              "apiKey" : {
+                "type": "string",
+                "default": ""
+              },
+              "stationID": {
+                "type": "string",
+                "default": ""
+              }
+            }
           }
         }
       }
@@ -508,6 +521,22 @@
                 {
                   "key": "stations[].fakegatoParameters",
                   "notitle": true
+                },
+                {
+                  "type": "fieldset",
+                  "title": "PWSWeather.com Account Details",
+                  "description": "<i>Sync the weather details to PWSWeather.com (works only for Wunderground PWS)</i>",
+                  "expandable": true,
+                  "items": [
+                    {
+                      "key": "stations[].pwsWeather.stationID",
+                      "title": "Station ID"
+                    },
+                    {
+                      "key": "stations[].pwsWeather.apiKey",
+                      "title": "API Key"
+                    }
+                  ]
                 }
               ]
             },

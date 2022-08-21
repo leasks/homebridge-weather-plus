@@ -1,6 +1,6 @@
 {
-  "name": "homebridge-weather-plus",
-  "version": "3.2.6",
+  "name": "homebridge-weather-plus-with-pws-sync",
+  "version": "0.3.0",
   "description": "A comprehensive weather plugin for homekit with current observations, forecasts and history.",
   "license": "MIT",
   "keywords": [
@@ -87,7 +87,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/naofireblade/homebridge-weather-plus.git"
+    "url": "https://github.com/sankara/homebridge-weather-plus.git"
   },
   "dependencies": {
     "dark-sky": "^1.1.5",
@@ -96,10 +96,7 @@
     "geo-tz": "^6.0.0",
     "moment-timezone": "^0.5.28",
     "underscore": "^1.10.2",
-    "request": "^2.88.2"
-  },
-  "funding": {
-    "type": "buymeacoffee",
-    "url": "https://buymeacoffee.com/naofireblade"
+    "request": "^2.88.2",
+    "axios": "^0.27.2"
   }
 }

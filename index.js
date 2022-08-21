@@ -4,16 +4,11 @@ const darksky = require("./apis/darksky").DarkSkyAPI,
     weatherunderground = require("./apis/weatherunderground").WundergroundAPI,
     openweathermap = require("./apis/openweathermap").OpenWeatherMapAPI,
     weewx = require("./apis/weewx").WeewxAPI,
-    debug = require("debug")("homebridge-weather-plus"),
-    compatibility = require("./util/compatibility");
+    pwsweather = require("./apis/pwsweather").PWSWeather,
+    debug = require("debug")("homebridge-weather-plus"), compatibility = require("./util/compatibility");
 
-let Service,
-    Characteristic,
-    CustomService,
-    CustomCharacteristic,
-    CurrentConditionsWeatherAccessory,
-    ForecastWeatherAccessory,
-    FakeGatoHistoryService;
+let Service, Characteristic, CustomService, CustomCharacteristic, CurrentConditionsWeatherAccessory,
+    ForecastWeatherAccessory, FakeGatoHistoryService;
 
 module.exports = function (homebridge) {
     // Homekit services and characteristics
@@ -67,7 +62,11 @@ function WeatherPlusPlatform(_log, _config) {
                 break;
             case "weatherunderground":
                 this.log.info("Adding station with weather service Weather Underground named '" + config.nameNow + "'");
-                this.stations.push(new weatherunderground(config.key, config.locationId, this.log));
+                let pwsService;
+                if (config.pwsWeather) {
+                    pwsService = new pwsweather(config.pwsWeather, this.log);
+                }
+                this.stations.push(new weatherunderground(config.key, config.locationId, this.log, pwsService));
                 break;
             case "openweathermap":
                 this.log.info("Adding station with weather service OpenWeatherMap named '" + config.nameNow + "'");

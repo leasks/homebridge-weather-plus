@@ -5,8 +5,10 @@ const request = require('request'),
     moment = require('moment-timezone'),
     debug = require('debug')('homebridge-weather-plus');
 
+//https://docs.google.com/document/d/1KGb8bTVYRsNgljnNH67AMhckY8AQT2FVwZ9urj8SWBs/
+
 class WundergroundAPI {
-    constructor(apiKey, location, log) {
+    constructor(apiKey, location, log, pwsService) {
         this.attribution = 'Powered by Weather Underground';
         this.reportCharacteristics = [
             'ObservationStation',
@@ -27,9 +29,10 @@ class WundergroundAPI {
 
         this.location = location;
         this.apiKey = apiKey;
+        this.pwsService = pwsService;
 
         // Get observation values only in si 's' for now.
-        this.units = 's';
+        this.units = 'e';//m for metrics. e for english
     }
 
     update(forecastDays, callback) {
@@ -46,6 +49,7 @@ class WundergroundAPI {
                     if (jsonObj.errors === undefined || jsonObj.errors.length === 0) {
                         debug(JSON.stringify(jsonObj, null, 2));
                         weather.report = that.parseReport(jsonObj);
+                        that.pwsService.notify(weather)
                         callback(null, weather);
                     } else {
                         throw new Error(JSON.stringify(jsonObj.errors, null, 2));
@@ -96,6 +100,7 @@ class WundergroundAPI {
             report.WindSpeedMax = isNaN(values.windGust) ? 0 : values.windGust;
             report.RainDay = isNaN(values.precipTotal) ? 0 : values.precipTotal;
 
+            report.WundergroundData = observation;
         } catch (error) {
             that.log.error("Error parsing weather report for Weather Underground");
             that.log.error("Error Message: " + error);
