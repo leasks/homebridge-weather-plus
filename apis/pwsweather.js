@@ -4,8 +4,8 @@ require('request');
 require('../util/converter');
 const
     moment = require('moment-timezone'),
-    debug = require('debug')('homebridge-weather-plus'),
-    axios_debug = require('axios-debug-log/enable'),
+    //debug = require('debug')('homebridge-weather-plus'),
+    //axios_debug = require('axios-debug-log/enable'),
     axios = require('axios')
 ;
 
@@ -33,7 +33,7 @@ class PWSWeather {
         let that = this;
         let queryUri = "https://pwsupdate.pwsweather.com/api/v1/submitwx?ID=" + this.stationID + "&PASSWORD=" + this.apiKey +
             "&softwaretype=Homebridge&action=updateraw" +
-            "&dateutc=" + moment(Date.parse(observation.obsTimeUtc)).format("yyyy-MM-DD+HH:mm:ss") +
+            "&dateutc=" + moment.utc(observation.obsTimeUtc).format("yyyy-MM-DD+HH:mm:ss") +
             "&winddir=" + observation.winddir +
             "&windspeedmph=" + values.windSpeed +
             "&windgustmph=" + values.windGust +
@@ -66,7 +66,7 @@ module.exports = {
 
 //Basic Test
 /*
-new PWSWeather({apiKey: "APIKEY", stationID: "STATIONID"}, {info: console.log, debug: console.log}).notify({
+new PWSWeather({apiKey: "APIKEY", stationID: "STATIONID"}, {info: console.log, debug: console.log, error: console.log}).notify({
     report: {
         WundergroundData: {
             obsTimeUtc: "2022-08-20T05:54:00",
@@ -84,5 +84,4 @@ new PWSWeather({apiKey: "APIKEY", stationID: "STATIONID"}, {info: console.log, d
         }
     }
 })
-
- */
+*/
