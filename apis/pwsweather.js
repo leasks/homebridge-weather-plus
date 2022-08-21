@@ -1,9 +1,11 @@
 /*jshint esversion: 6,node: true,-W041: false */
 "use strict";
-const request = require('request'),
-    converter = require('../util/converter'),
+require('request');
+require('../util/converter');
+const
     moment = require('moment-timezone'),
     debug = require('debug')('homebridge-weather-plus'),
+    axios_debug = require('axios-debug-log/enable'),
     axios = require('axios')
 ;
 
@@ -26,11 +28,11 @@ class PWSWeather {
         //Plus, the converstion between units is painful. Wish Report was a class that took in all the
         //observed values and spit out any unit we ask for. That would have been nice.
         //TODO For another day.
-        let that = this;
         let observation = weather.report.WundergroundData;
         let values = observation.imperial;
         let queryUri = "https://pwsupdate.pwsweather.com/api/v1/submitwx?ID=" + this.stationID + "&PASSWORD=" + this.apiKey +
             "&softwaretype=Homebridge&action=updateraw" +
+            "&dateutc=" + moment(Date.parse(observation.obsTimeUtc)).format("yyyy-MM-DD+HH:mm:ss") +
             "&winddir=" + observation.winddir +
             "&windspeedmph=" + values.windSpeed +
             "&windgustmph=" + values.windGust +
@@ -44,9 +46,9 @@ class PWSWeather {
             "&UV=" + observation.uv
         ;
 
-        that.log.info("Posting to PWS")
+        that.log.info("Posting to PWS: " + queryUri)
         axios
-            .get(queryUri)
+            .get(encodeURI(queryUri))
             .then(res => {
                 that.log.info("Data posted to PWS: " + res.status + " " + res.statusText)
             })
