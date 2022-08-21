@@ -30,6 +30,7 @@ class PWSWeather {
         //TODO For another day.
         let observation = weather.report.WundergroundData;
         let values = observation.imperial;
+        let that = this;
         let queryUri = "https://pwsupdate.pwsweather.com/api/v1/submitwx?ID=" + this.stationID + "&PASSWORD=" + this.apiKey +
             "&softwaretype=Homebridge&action=updateraw" +
             "&dateutc=" + moment(Date.parse(observation.obsTimeUtc)).format("yyyy-MM-DD+HH:mm:ss") +
@@ -62,3 +63,26 @@ class PWSWeather {
 module.exports = {
     PWSWeather: PWSWeather
 };
+
+//Basic Test
+/*
+new PWSWeather({apiKey: "APIKEY", stationID: "STATIONID"}, {info: console.log, debug: console.log}).notify({
+    report: {
+        WundergroundData: {
+            obsTimeUtc: "2022-08-20T05:54:00",
+            winddir: 235,
+            humidity: 45,
+            imperial: {
+                pressure: "1009",
+                dewpt: "12",
+                precipRate: "0",
+                precipTotal: "0",
+                temp: "25",
+                windGust: 25,
+                windSpeed: 3,
+            }
+        }
+    }
+})
+
+ */
