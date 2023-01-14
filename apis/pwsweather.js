@@ -29,14 +29,17 @@ class PWSWeather {
         //Plus, the converstion between units is painful. Wish Report was a class that took in all the
         //observed values and spit out any unit we ask for. That would have been nice.
         //TODO For another day.
+        
+        // Also WeatherUnderground seems to only provide wind speed in m/s not km/h so
+        // adjust the conversion by 3.6 first to make km/h
         let report = weather.report;
         let that = this;
         let queryUri = "https://pwsupdate.pwsweather.com/api/v1/submitwx?ID=" + this.stationID + "&PASSWORD=" + this.apiKey +
             "&softwaretype=Homebridge&action=updateraw" +
             "&dateutc=" + report.ObservationTimeUTC +
             "&winddir=" + report.WindBearing +
-            "&windspeedmph=" + converter.kmToMiles(report.WindSpeed) +
-            "&windgustmph=" + converter.kmToMiles(report.WindSpeedMax) +
+            "&windspeedmph=" + converter.kmToMiles(report.WindSpeed * 3.6) +
+            "&windgustmph=" + converter.kmToMiles(report.WindSpeedMax * 3.6) +
             "&tempf=" + converter.cToF(report.Temperature) +
             "&rainin=" + converter.cmToIn(report.Precipitation) +
             "&daiyrainin=" + converter.cmToIn(report.PrecipitationTotal) +
