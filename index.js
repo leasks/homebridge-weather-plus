@@ -66,7 +66,7 @@ function WeatherPlusPlatform(_log, _config) {
                 if (config.pwsWeather) {
                     pwsService = new pwsweather(config.pwsWeather, this.log);
                 }
-                this.stations.push(new weatherunderground(config.key, config.locationId, this.log, pwsService));
+                this.stations.push(new weatherunderground(config.key, config.locationId, this.log, pwsService, config.locationGeo, config.conditionDetail));
                 break;
             case "openweathermap":
                 this.log.info("Adding station with weather service OpenWeatherMap named '" + config.nameNow + "'");
