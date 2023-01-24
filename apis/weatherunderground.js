@@ -169,12 +169,12 @@ class WundergroundAPI {
         
         try {
             let values = json.daypart[0];
-            report.CloudCover = isNaN(values.cloudCover[day * 2]) ? (isNaN(values.cloudCover[day * 2 + 1]) ? 0 : values.cloudCover[day * 2 + 1]) : values.cloudCover[day * 2];
+            report.CloudCover = values.cloudCover[day * 2] === null ? (values.cloudCover[day * 2 + 1] === null ? 0 : values.cloudCover[day * 2 + 1]) : values.cloudCover[day * 2];
             report.Condition = json.narrative[day].substring(0, 64);
-            let iconCode = isNaN(values.iconCode[day * 2]) ? values.iconCode[day * 2 + 1] : values.iconCode[day * 2];
+            let iconCode = values.iconCode[day * 2] === null ? values.iconCode[day * 2 + 1] : values.iconCode[day * 2];
             report.ConditionCategory = this.getConditionCategory(iconCode, this.conditionDetail);
-            report.Humidity = isNaN(values.relativeHumidity[day * 2]) ? (isNaN(values.relativeHumidity[day * 2 + 1]) ? 0 : values.relativeHumidity[day * 2 + 1]) : values.relativeHumidity[day * 2];
-            report.UVIndex = isNaN(values.uvIndex[day * 2]) ? (isNaN(values.uvIndex[day * 2 + 1]) ? 0 : values.uvIndex[day * 2 + 1]) : values.uvIndex[day * 2];
+            report.Humidity = values.relativeHumidity[day * 2] === null ? (values.relativeHumidity[day * 2 + 1] === null ? 0 : values.relativeHumidity[day * 2 + 1]) : values.relativeHumidity[day * 2];
+            report.UVIndex = values.uvIndex[day * 2] === null ? (values.uvIndex[day * 2 + 1] === null ? 0 : values.uvIndex[day * 2 + 1]) : values.uvIndex[day * 2];
             report.TemperatureMin = isNaN(json.calendarDayTemperatureMin[day]) ? 0 : json.calendarDayTemperatureMin[day];
             report.TemperatureMax = isNaN(json.calendarDayTemperatureMax[day]) ? 0 : json.calendarDayTemperatureMax[day];
 
@@ -185,13 +185,13 @@ class WundergroundAPI {
             let precipTot = isNaN(json.qpf[day]) ? 0 : json.qpf[day];
             precipTot += isNaN(json.qpfSnow[day]) ? 0 : json.qpfSnow[day];
             report.RainDay = precipTot;
-            report.RainChance = isNaN(values.precipChance[day * 2]) ? (isNaN(values.precipChance[day * 2 + 1]) ? 0 : values.precipChance[day * 2 + 1]) : values.precipChance[day * 2];
+            report.RainChance = values.precipChance[day * 2] === null ? (values.precipChance[day * 2 + 1] === null ? 0 : values.precipChance[day * 2 + 1]) : values.precipChance[day * 2];
             report.ForecastDay = json.dayOfWeek[day];
             report.SunriseTime = moment.utc(json.sunriseTimeLocal[day]).format("yyyy-MM-DD+HH:mm:ss");
             report.SunsetTime = moment.utc(json.sunsetTimeLocal[day]).format("yyyy-MM-DD+HH:mm:ss");
-            report.WindDirection = isNaN(values.windDirectionCardinal[day * 2]) ? values.windDirectionCardinal[day * 2 + 1] : values.windDirectionCardinal[day * 2];
-            report.WindBearing = isNaN(values.windDirection[day * 2]) ? values.windDirection[day * 2 + 1] : values.windDirection[day * 2];
-            report.WindSpeed = isNaN(values.windSpeed[day * 2]) ? (isNaN(values.windSpeed[day * 2 + 1]) ? 0 : values.windSpeed[day * 2 + 1]) : values.windSpeed[day * 2];
+            report.WindDirection = values.windDirectionCardinal[day * 2] === null ? values.windDirectionCardinal[day * 2 + 1] : values.windDirectionCardinal[day * 2];
+            report.WindBearing = values.windDirection[day * 2] === null ? values.windDirection[day * 2 + 1] : values.windDirection[day * 2];
+            report.WindSpeed = values.windSpeed[day * 2] === null ? (values.windSpeed[day * 2 + 1] === null ? 0 : values.windSpeed[day * 2 + 1]) : values.windSpeed[day * 2];
         }  catch (error) {
             that.log.error("Error parsing weather forecast for Weather Underground");
             that.log.error("Error Message: " + error);
